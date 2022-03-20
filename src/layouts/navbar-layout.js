@@ -1,13 +1,16 @@
-import MenuTop from '../components/menu-top'
+import MenuTop from '../shared-components/menu-top'
 import { Outlet } from 'react-router'
+import { Container } from '@mui/material'
 
 
 export default function NavbarLayout() {
   return (
     <>
-      <MenuTop />
-      <Outlet />
+      <MenuTop/>
+      <Container>
+        <Outlet/>
+      </Container>
     </>
-);
+  );
 }
 
