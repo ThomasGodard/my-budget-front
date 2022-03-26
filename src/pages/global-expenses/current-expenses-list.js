@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react'
 import { fetchEstimatedExpenses } from '../../services/estimated-espenses.service'
 import { Card, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
-import { DeleteForeverSharp, EditSharp, CheckSharp } from '@mui/icons-material'
+import { DeleteForeverSharp, EditSharp } from '@mui/icons-material'
 import IconButton from '@mui/material/IconButton'
+
+const EDIT = 'edit'
+const DELETE = 'delete'
 
 const EstimatedExpensesList = () => {
   const [ transactions, setTransactions ] = useState([])
 
   const columnsHeader = [
-    { label: 'Libelle', align: 'inherit'},
-    { label: 'Date estimé de la transaction', align: 'inherit' },
-    { label: 'Montant', align: 'inherit' },
-    { label: 'Action', align: 'center' }
+    { key: 1, label: 'Libelle', align: 'inherit'},
+    { key: 2, label: 'Date de la transaction', align: 'inherit' },
+    { key: 3, label: 'Montant', align: 'inherit' },
+    { key: 4, label: 'Action', align: 'right' }
   ];
   
   useEffect(() => {
@@ -19,46 +22,29 @@ const EstimatedExpensesList = () => {
     return () => subscription.unsubscribe()
   }, [])
 
-  const handleValidateButtonClick = (event) => {
+  const handleActionButtonClick = (event) => {
     event.stopPropagation()
-    const { id } = event.currentTarget.dataset
-    console.log(`click Validate`, event, id)
-  }  
-  
-  const handleEditButtonClick = (event) => {
-    event.stopPropagation()
-    const { id } = event.currentTarget.dataset
-    console.log(`click Edit`, event, id)
-  }
-
-  const handleDeleteButtonClick = (event) => {
-    event.stopPropagation()
-    const { id } = event.currentTarget.dataset
-    console.log(`click Delete`, event, id)
+    const { id, action } = event.currentTarget.dataset
+    console.log(`click ${action}`, event, id)
   }
 
 
   const CellActionButtons = ({ id }) => {
     return (
-      <Stack direction={'row'} spacing={2} justifyContent={'space-evenly'}>
-        <IconButton
-          color="success"
-          data-id={id}
-          onClick={handleValidateButtonClick}
-        >
-          <CheckSharp/>
-        </IconButton>
+      <Stack direction={'row'} spacing={2} justifyContent={'flex-end'}>
         <IconButton
           color="primary"
           data-id={id}
-          onClick={handleEditButtonClick}
+          data-action={EDIT}
+          onClick={handleActionButtonClick}
         >
           <EditSharp/>
         </IconButton>
         <IconButton
           color="error"
           data-id={id}
-          onClick={handleDeleteButtonClick}
+          data-action={DELETE}
+          onClick={handleActionButtonClick}
         >
           <DeleteForeverSharp/>
         </IconButton>
@@ -72,15 +58,15 @@ const EstimatedExpensesList = () => {
         <Table>
           <TableHead>
             <TableRow>
-              {columnsHeader.map(({ label, align }) => 
-                (<TableCell key={label} align={align}>{label}</TableCell>)
+              {columnsHeader.map(({ key, label, align }) => 
+                (<TableCell key={key} align={align}>{label}</TableCell>)
               )}
             </TableRow>
           </TableHead>
           <TableBody>
             {transactions.map(({ id, label, startDate, amount }) => (
               <TableRow key={id}>
-                <TableCell sx={{ width: '40%' }}>{label}</TableCell>
+                <TableCell>{label}</TableCell>
                 <TableCell>{startDate}</TableCell>
                 <TableCell>{amount}</TableCell>
                 <TableCell align={"right"}>

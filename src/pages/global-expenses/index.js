@@ -3,8 +3,11 @@ import EstimatedExpensesList from './estimated-expenses-list'
 export default function GlobalExpensesPage() {
   return (
     <>
-      <p>Global expense</p>
-      <EstimatedExpensesList />
+      <p>Dépenses du mois</p>
+      <p>Dépenses prévisionnelles</p>
+      <EstimatedExpensesList/>
+      <p>Dépenses courantes</p>
+      
     </>
   )
 }
