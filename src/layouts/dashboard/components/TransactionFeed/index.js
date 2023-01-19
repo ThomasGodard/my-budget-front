@@ -21,31 +21,31 @@ import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 
 // Billing page components
-import Bill from "layouts/dashboard/components/Bill";
+import Transaction from "layouts/dashboard/components/Transaction";
 
-function BillingInformation() {
+function TransactionFeed() {
   return (
     <Card id="delete-account">
       <SoftBox pt={3} px={2}>
-        <SoftTypography variant="h6" fontWeight="medium">
-          Billing Information
+        <SoftTypography variant="h5" fontWeight="medium">
+          Mes Transactions
         </SoftTypography>
       </SoftBox>
       <SoftBox pt={1} pb={2} px={2}>
         <SoftBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
-          <Bill
+          <Transaction
             name="oliver liam"
             company="viking burrito"
             email="oliver@burrito.com"
             vat="FRB1235476"
           />
-          <Bill
+          <Transaction
             name="lucas harper"
             company="stone tech zone"
             email="lucas@stone-tech.com"
             vat="FRB1235476"
           />
-          <Bill
+          <Transaction
             name="ethan james"
             company="fiber notion"
             email="ethan@fiber.com"
@@ -58,4 +58,4 @@ function BillingInformation() {
   );
 }
 
-export default BillingInformation;
+export default TransactionFeed;

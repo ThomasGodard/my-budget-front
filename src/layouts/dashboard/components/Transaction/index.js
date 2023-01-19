@@ -22,51 +22,51 @@ import Icon from "@mui/material/Icon";
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
-import SoftButton from "components/SoftButton";
 
-function Transaction({ color, icon, name, description, value }) {
+function Transaction({ name, company, email, vat }) {
   return (
-    <SoftBox key={name} component="li" py={1} pr={2} mb={1}>
-      <SoftBox display="flex" justifyContent="space-between" alignItems="center">
+    <SoftBox key={name} component="li"
+             display="flex"
+             justifyContent="space-between"
+             alignItems="flex-start"
+             bgColor="grey-100"
+             borderRadius="lg"
+             p={3}
+             mb={1}
+             mt={2}>
+      <SoftBox width="100%" display="flex" justifyContent="space-between" alignItems="center">
         <SoftBox display="flex" alignItems="center">
           <SoftBox mr={2}>
-            <SoftButton variant="outlined" color={color} size="small" iconOnly circular>
-              <Icon sx={{ fontWeight: "bold" }}>{icon}</Icon>
-            </SoftButton>
+            <Icon sx={{ fontWeight: "bold" }}>arrow_upward</Icon>
           </SoftBox>
           <SoftBox display="flex" flexDirection="column">
-            <SoftTypography variant="button" fontWeight="medium" gutterBottom>
+            <SoftTypography variant="h6" fontWeight="medium" textTransform="capitalize">
               {name}
             </SoftTypography>
             <SoftTypography variant="caption" color="text">
-              {description}
+              {'Paypal'}
             </SoftTypography>
           </SoftBox>
         </SoftBox>
-        <SoftTypography variant="button" color={color} fontWeight="medium" textGradient>
-          {value}
+        <SoftTypography variant="button" fontWeight="medium" textGradient>
+          {'150'}
         </SoftTypography>
       </SoftBox>
     </SoftBox>
   );
 }
 
-// Typechecking props of the Transaction
+// Setting default values for the props of Bill
+Transaction.defaultProps = {
+  noGutter: false,
+};
+
+// Typechecking props for the Bill
 Transaction.propTypes = {
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "info",
-    "success",
-    "warning",
-    "error",
-    "light",
-    "dark",
-  ]).isRequired,
-  icon: PropTypes.node.isRequired,
   name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  company: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  vat: PropTypes.string.isRequired
 };
 
 export default Transaction;
